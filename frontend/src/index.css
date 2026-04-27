@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.8); }
+  }
+  
+  .animate-ping {
+    animation: pulse-dot 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+body {
+  @apply bg-gray-950 text-gray-100;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
