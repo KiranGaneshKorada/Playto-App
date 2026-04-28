@@ -130,6 +130,15 @@ CSRF_TRUSTED_ORIGINS = config(
     cast=Csv(),
     default='http://localhost:5173,http://127.0.0.1:5173'
 )
+
+# Cross-site cookie settings (Vercel frontend → Railway backend).
+# In production we serve over HTTPS, so SameSite=None + Secure is required
+# for the browser to send the session/CSRF cookies on cross-origin fetches.
+if not DEBUG:
+    SESSION_COOKIE_SAMESITE = 'None'
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SAMESITE = 'None'
+    CSRF_COOKIE_SECURE = True
 from corsheaders.defaults import default_headers
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'idempotency-key',
