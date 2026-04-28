@@ -1,5 +1,6 @@
 from django.urls import path
 from django.http import HttpResponseNotAllowed
+from django.views.decorators.csrf import csrf_exempt
 from payouts.views import (
     BalanceView,
     BankAccountListView,
@@ -9,6 +10,7 @@ from payouts.views import (
     LedgerView
 )
 
+@csrf_exempt
 def payouts_dispatcher(request, *args, **kwargs):
     if request.method == 'GET':
         return PayoutListView.as_view()(request, *args, **kwargs)
